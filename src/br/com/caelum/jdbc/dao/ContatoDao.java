@@ -14,7 +14,9 @@ import java.util.List;
 public class ContatoDao {
 
     private Connection connection;
-
+    public ContatoDao(Connection connection) {
+    	this.connection = connection;
+    }
     public ContatoDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
@@ -41,9 +43,9 @@ public class ContatoDao {
     public void alterar(String n){
         
     }
-    public void deletar(String n){
+    public void deletar(Contato contato){
         try{
-        PreparedStatement stmt = this.connection.prepareStatement("delete from contatos where nome ='" + n + "'");
+        PreparedStatement stmt = this.connection.prepareStatement("delete from contatos where id ='" + contato.getId() + "'");
         stmt.execute();
         stmt.close();
         System.out.println("Contato Deletado");
